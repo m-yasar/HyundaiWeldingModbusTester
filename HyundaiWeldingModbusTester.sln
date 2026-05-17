@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyundaiWeldingModbusTester", "XMSeriesRoboticWMTestSoftware\HyundaiWeldingModbusTester.csproj", "{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{824EA168-09C1-437F-A51C-8BDE0B6BFF29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8605AB00-AF18-48E0-AC60-710234269CA0}
+	EndGlobalSection
+EndGlobal

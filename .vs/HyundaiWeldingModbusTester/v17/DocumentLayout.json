@@ -1,0 +1,154 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|c:\\users\\musta\\onedrive\\desktop\\hyundaiweldingmodbustester\\xmseriesroboticwmtestsoftware\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|c:\\users\\musta\\onedrive\\desktop\\hyundaiweldingmodbustester\\xmseriesroboticwmtestsoftware\\properties\\resources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\properties\\resources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware.csproj|c:\\users\\musta\\onedrive\\desktop\\hyundaiweldingmodbustester\\xmseriesroboticwmtestsoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|c:\\users\\musta\\onedrive\\desktop\\hyundaiweldingmodbustester\\xmseriesroboticwmtestsoftware\\statuslight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\statuslight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|c:\\users\\musta\\onedrive\\desktop\\hyundaiweldingmodbustester\\xmseriesroboticwmtestsoftware\\properties\\settings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\properties\\settings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|c:\\users\\musta\\onedrive\\desktop\\hyundaiweldingmodbustester\\xmseriesroboticwmtestsoftware\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\HyundaiWeldingModbusTester.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware.csproj|C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\xmseriesroboticwmtestsoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware.csproj|C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\xmseriesroboticwmtestsoftware\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5FFB6A6-46E8-494D-AB14-834ED10C5BAA}|XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware.csproj|solutionrelative:xmseriesroboticwmtestsoftware\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Form1.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\Form1.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Form1.cs",
+              "RelativeToolTip": "XMSeriesRoboticWMTestSoftware\\Form1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T11:09:48.6Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StatusLight.cs",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\StatusLight.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\StatusLight.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\StatusLight.cs",
+              "RelativeToolTip": "XMSeriesRoboticWMTestSoftware\\StatusLight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T19:57:32.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Settings.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Properties\\Settings.Designer.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\Properties\\Settings.Designer.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Properties\\Settings.Designer.cs",
+              "RelativeToolTip": "XMSeriesRoboticWMTestSoftware\\Properties\\Settings.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T19:57:32.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Resources.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Properties\\Resources.Designer.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\Properties\\Resources.Designer.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Properties\\Resources.Designer.cs",
+              "RelativeToolTip": "XMSeriesRoboticWMTestSoftware\\Properties\\Resources.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T19:57:32.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Program.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\Program.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Program.cs",
+              "RelativeToolTip": "XMSeriesRoboticWMTestSoftware\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T19:57:31.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Properties\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\Properties\\AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Properties\\AssemblyInfo.cs",
+              "RelativeToolTip": "XMSeriesRoboticWMTestSoftware\\Properties\\AssemblyInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T19:57:29.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Form1.Designer.cs",
+              "RelativeToolTip": "XMSeriesRoboticWMTestSoftware\\Form1.Designer.cs",
+              "ViewState": "AQIAABsGAAAAAAAAAAAUwEQGAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T13:10:24.419Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\musta\\OneDrive\\Desktop\\HyundaiWeldingModbusTester\\XMSeriesRoboticWMTestSoftware\\Form1.cs",
+              "RelativeDocumentMoniker": "XMSeriesRoboticWMTestSoftware\\Form1.cs",
+              "ToolTip": "C:\\Users\\musta\\OneDrive\\Desktop\\XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\XMSeriesRoboticWMTestSoftware\\XMSeriesRoboticWMTestSoftware\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T11:07:00.136Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
