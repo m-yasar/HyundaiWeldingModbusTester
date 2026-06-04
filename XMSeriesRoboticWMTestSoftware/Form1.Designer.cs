@@ -21,6 +21,21 @@ namespace XMSeriesRoboticWMTestSoftware
             this.tryConnect       = new System.Windows.Forms.Button();
             this.connectionStatus = new XMSeriesRoboticWMTestSoftware.StatusLight();
             this.timer1           = new System.Windows.Forms.Timer(this.components);
+            this.timer2           = new System.Windows.Forms.Timer(this.components);
+            // -- Machine Outputs panel
+            this.gbMachineOutputs = new System.Windows.Forms.GroupBox();
+            this.slArcDetect      = new XMSeriesRoboticWMTestSoftware.StatusLight();
+            this.slLimitSignal    = new XMSeriesRoboticWMTestSoftware.StatusLight();
+            this.slProcActive     = new XMSeriesRoboticWMTestSoftware.StatusLight();
+            this.slPsNotReady     = new XMSeriesRoboticWMTestSoftware.StatusLight();
+            this.lblArcDetect     = new System.Windows.Forms.Label();
+            this.lblLimitSignal   = new System.Windows.Forms.Label();
+            this.lblProcActive    = new System.Windows.Forms.Label();
+            this.lblPsNotReady    = new System.Windows.Forms.Label();
+            this.lblIoutName      = new System.Windows.Forms.Label();
+            this.lblVoutName      = new System.Windows.Forms.Label();
+            this.lblIoutVal       = new System.Windows.Forms.Label();
+            this.lblVoutVal       = new System.Windows.Forms.Label();
             // -- Basic controls
             this.cbWeldingStart   = new System.Windows.Forms.CheckBox();
             this.cbRobotReady     = new System.Windows.Forms.CheckBox();
@@ -96,7 +111,72 @@ namespace XMSeriesRoboticWMTestSoftware
             this.gbIgnition.SuspendLayout();
             this.gbWorkingMode.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.gbMachineOutputs.SuspendLayout();
             this.SuspendLayout();
+
+            // ── timer2 (Modbus read, 200 ms) ────────────────────────────────────
+            this.timer2.Interval = 200;
+            this.timer2.Tick    += new System.EventHandler(this.timer2_Tick);
+
+            // ── Machine Outputs GroupBox ─────────────────────────────────────────
+            int gx = 10, gy = 40, gw = 275;
+            System.Action<StatusLight, int> setupSL = (sl, y) => {
+                sl.IsOn    = false;
+                sl.Size    = new System.Drawing.Size(18, 18);
+                sl.Location = new System.Drawing.Point(gw - 32, y);
+            };
+            System.Action<System.Windows.Forms.Label, string, int> setupSigLabel = (lbl, text, y) => {
+                lbl.AutoSize = true;
+                lbl.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+                lbl.Location = new System.Drawing.Point(10, y + 1);
+                lbl.Text     = text;
+            };
+
+            setupSigLabel(this.lblArcDetect,   "Arc Detect",   25);
+            setupSL(this.slArcDetect,  25);
+            setupSigLabel(this.lblLimitSignal,  "Limit Signal",  50);
+            setupSL(this.slLimitSignal, 50);
+            setupSigLabel(this.lblProcActive,   "Proc Active",   75);
+            setupSL(this.slProcActive,  75);
+            setupSigLabel(this.lblPsNotReady,   "PS NOT Ready", 100);
+            setupSL(this.slPsNotReady,  100);
+
+            this.lblIoutName.AutoSize = true;
+            this.lblIoutName.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.lblIoutName.Location = new System.Drawing.Point(10, 132);
+            this.lblIoutName.Text     = "Weld Fdbk 1 (Current)";
+            this.lblIoutVal.AutoSize  = true;
+            this.lblIoutVal.Font      = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblIoutVal.Location  = new System.Drawing.Point(10, 152);
+            this.lblIoutVal.Text      = "0 → 0.0 A";
+
+            this.lblVoutName.AutoSize = true;
+            this.lblVoutName.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.lblVoutName.Location = new System.Drawing.Point(10, 178);
+            this.lblVoutName.Text     = "Weld Fdbk 2 (Voltage)";
+            this.lblVoutVal.AutoSize  = true;
+            this.lblVoutVal.Font      = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblVoutVal.Location  = new System.Drawing.Point(10, 198);
+            this.lblVoutVal.Text      = "0 → 0.0 V";
+
+            this.gbMachineOutputs.Controls.Add(this.slArcDetect);
+            this.gbMachineOutputs.Controls.Add(this.slLimitSignal);
+            this.gbMachineOutputs.Controls.Add(this.slProcActive);
+            this.gbMachineOutputs.Controls.Add(this.slPsNotReady);
+            this.gbMachineOutputs.Controls.Add(this.lblArcDetect);
+            this.gbMachineOutputs.Controls.Add(this.lblLimitSignal);
+            this.gbMachineOutputs.Controls.Add(this.lblProcActive);
+            this.gbMachineOutputs.Controls.Add(this.lblPsNotReady);
+            this.gbMachineOutputs.Controls.Add(this.lblIoutName);
+            this.gbMachineOutputs.Controls.Add(this.lblIoutVal);
+            this.gbMachineOutputs.Controls.Add(this.lblVoutName);
+            this.gbMachineOutputs.Controls.Add(this.lblVoutVal);
+            this.gbMachineOutputs.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.gbMachineOutputs.Location = new System.Drawing.Point(gx, gy);
+            this.gbMachineOutputs.Name     = "gbMachineOutputs";
+            this.gbMachineOutputs.Size     = new System.Drawing.Size(gw, 225);
+            this.gbMachineOutputs.TabStop  = false;
+            this.gbMachineOutputs.Text     = "Status and Signals";
 
             // ── Connection bar ──────────────────────────────────────────────────
             this.ipAddress.Location = new System.Drawing.Point(10, 11);
@@ -476,12 +556,16 @@ namespace XMSeriesRoboticWMTestSoftware
             this.Controls.Add(this.rtblogSend);
             this.Controls.Add(this.groupBox1);
 
+            this.Controls.Add(this.gbMachineOutputs);
+
             this.gbIgnition.ResumeLayout(false);
             this.gbIgnition.PerformLayout();
             this.gbWorkingMode.ResumeLayout(false);
             this.gbWorkingMode.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbMachineOutputs.ResumeLayout(false);
+            this.gbMachineOutputs.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -555,6 +639,21 @@ namespace XMSeriesRoboticWMTestSoftware
         // Send & log
         private System.Windows.Forms.Button         btnSend;
         private System.Windows.Forms.RichTextBox    rtblogSend;
+        // Machine Outputs
+        private System.Windows.Forms.Timer          timer2;
+        private System.Windows.Forms.GroupBox       gbMachineOutputs;
+        private StatusLight                          slArcDetect;
+        private StatusLight                          slLimitSignal;
+        private StatusLight                          slProcActive;
+        private StatusLight                          slPsNotReady;
+        private System.Windows.Forms.Label          lblArcDetect;
+        private System.Windows.Forms.Label          lblLimitSignal;
+        private System.Windows.Forms.Label          lblProcActive;
+        private System.Windows.Forms.Label          lblPsNotReady;
+        private System.Windows.Forms.Label          lblIoutName;
+        private System.Windows.Forms.Label          lblVoutName;
+        private System.Windows.Forms.Label          lblIoutVal;
+        private System.Windows.Forms.Label          lblVoutVal;
         // About
         private System.Windows.Forms.GroupBox       groupBox1;
         private System.Windows.Forms.Label          lblAbout;

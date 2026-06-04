@@ -25,6 +25,7 @@ namespace XMSeriesRoboticWMTestSoftware
                 _client.Connect(new IPEndPoint(IPAddress.Parse(ipAddress.Text), 502));
                 connectionStatus.IsOn = true;
                 timer1.Start();
+                timer2.Start();
                 MessageBox.Show("Connection Established!");
             }
             catch (Exception ex)
@@ -41,8 +42,45 @@ namespace XMSeriesRoboticWMTestSoftware
             if (_client == null || !_client.IsConnected)
             {
                 timer1.Stop();
+                timer2.Stop();
                 connectionStatus.IsOn = false;
             }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (_client == null || !_client.IsConnected) return;
+            try
+            {
+                // COM_DO: read 6 input registers = 12 bytes (covers bytes 0-11)
+                var raw = _client.ReadInputRegisters<short>(1, 0, 6);
+
+                // Modbus big-endian → little-endian bytes
+                byte[] b = new byte[12];
+                for (int i = 0; i < 6; i++)
+                {
+                    ushort reg = (ushort)raw[i];
+                    b[2 * i]     = (byte)(reg >> 8);
+                    b[2 * i + 1] = (byte)(reg & 0xFF);
+                }
+
+                // Byte 0: bit3=ProcessActive, bit5=ArcStable_TouchSignal
+                slArcDetect.IsOn  = ((b[0] >> 5) & 1) == 1;
+                slProcActive.IsOn = ((b[0] >> 3) & 1) == 1;
+                // Byte 2: bit3=LimitSignal
+                slLimitSignal.IsOn = ((b[2] >> 3) & 1) == 1;
+                // Byte 4: bit7=SystemNotReady
+                slPsNotReady.IsOn = ((b[4] >> 7) & 1) == 1;
+
+                // Byte 8-9: WeldingVoltage (÷10 → V)
+                ushort rawV = (ushort)(b[8] | (b[9] << 8));
+                lblVoutVal.Text = $"{rawV} → {rawV / 10.0:F1} V";
+
+                // Byte 10-11: WeldingCurrent (÷10 → A)
+                ushort rawI = (ushort)(b[10] | (b[11] << 8));
+                lblIoutVal.Text = $"{rawI} → {rawI / 10.0:F1} A";
+            }
+            catch { }
         }
 
         private void UpdateWorkingMode()
