@@ -96,8 +96,18 @@ namespace XMSeriesRoboticWMTestSoftware
             this.lblEndCurrentTimeVal     = new System.Windows.Forms.Label();
             this.lblPostGasVal            = new System.Windows.Forms.Label();
             // -- Send & log
-            this.btnSend      = new System.Windows.Forms.Button();
+            this.btnSend          = new System.Windows.Forms.Button();
+            this.btnTest          = new System.Windows.Forms.Button();
+            this.txtDeneme        = new System.Windows.Forms.TextBox();
+            this.lblDeneme        = new System.Windows.Forms.Label();
+            this.txtBekleme       = new System.Windows.Forms.TextBox();
+            this.lblBekleme       = new System.Windows.Forms.Label();
+            this.txtTestDuration  = new System.Windows.Forms.TextBox();
+            this.lblTestDuration  = new System.Windows.Forms.Label();
             this.rtblogSend   = new System.Windows.Forms.RichTextBox();
+            this.rtblogRecv   = new System.Windows.Forms.RichTextBox();
+            this.lblLogSend   = new System.Windows.Forms.Label();
+            this.lblLogRecv   = new System.Windows.Forms.Label();
             // -- About group
             this.groupBox1    = new System.Windows.Forms.GroupBox();
             this.lblAbout     = new System.Windows.Forms.Label();
@@ -422,25 +432,104 @@ namespace XMSeriesRoboticWMTestSoftware
             this.txtEndCurrentTime.TabIndex     = ti++;
             this.txtPostGas.TabIndex            = ti++;
 
+            // ── Test parametre satırı — label SOL, textbox SAĞ, hepsi y=460 ────────
+            int py = 460;
+
+            this.lblDeneme.AutoSize = false;
+            this.lblDeneme.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblDeneme.Location = new System.Drawing.Point(300, py + 2);
+            this.lblDeneme.Size     = new System.Drawing.Size(62, 18);
+            this.lblDeneme.Name     = "lblDeneme";
+            this.lblDeneme.Text     = "Deneme:";
+
+            this.txtDeneme.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtDeneme.Location = new System.Drawing.Point(364, py);
+            this.txtDeneme.Name     = "txtDeneme";
+            this.txtDeneme.Size     = new System.Drawing.Size(48, 22);
+            this.txtDeneme.TabIndex = ti++;
+            this.txtDeneme.Text     = "1";
+            this.txtDeneme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericOnly_KeyPress);
+
+            this.lblBekleme.AutoSize = false;
+            this.lblBekleme.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblBekleme.Location = new System.Drawing.Point(422, py + 2);
+            this.lblBekleme.Size     = new System.Drawing.Size(90, 18);
+            this.lblBekleme.Name     = "lblBekleme";
+            this.lblBekleme.Text     = "Bekleme(s):";
+
+            this.txtBekleme.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtBekleme.Location = new System.Drawing.Point(514, py);
+            this.txtBekleme.Name     = "txtBekleme";
+            this.txtBekleme.Size     = new System.Drawing.Size(48, 22);
+            this.txtBekleme.TabIndex = ti++;
+            this.txtBekleme.Text     = "2";
+            this.txtBekleme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericOnly_KeyPress);
+
+            this.lblTestDuration.AutoSize = false;
+            this.lblTestDuration.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.lblTestDuration.Location = new System.Drawing.Point(572, py + 2);
+            this.lblTestDuration.Size     = new System.Drawing.Size(56, 18);
+            this.lblTestDuration.Name     = "lblTestDuration";
+            this.lblTestDuration.Text     = "Sure(s):";
+
+            this.txtTestDuration.Font     = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtTestDuration.Location = new System.Drawing.Point(630, py);
+            this.txtTestDuration.Name     = "txtTestDuration";
+            this.txtTestDuration.Size     = new System.Drawing.Size(48, 22);
+            this.txtTestDuration.TabIndex = ti++;
+            this.txtTestDuration.Text     = "5";
+            this.txtTestDuration.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericOnly_KeyPress);
+
+            // ── Test button ──────────────────────────────────────────────────────
+            this.btnTest.Font     = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
+            this.btnTest.Location = new System.Drawing.Point(300, 490);
+            this.btnTest.Name     = "btnTest";
+            this.btnTest.Size     = new System.Drawing.Size(185, 48);
+            this.btnTest.TabIndex = ti++;
+            this.btnTest.Text     = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click   += new System.EventHandler(this.btnTest_Click);
+
             // ── Send button ─────────────────────────────────────────────────────
             this.btnSend.Font     = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.btnSend.Location = new System.Drawing.Point(300, 474);
+            this.btnSend.Location = new System.Drawing.Point(493, 490);
             this.btnSend.Name     = "btnSend";
-            this.btnSend.Size     = new System.Drawing.Size(580, 48);
+            this.btnSend.Size     = new System.Drawing.Size(387, 48);
             this.btnSend.TabIndex = ti++;
             this.btnSend.Text     = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click   += new System.EventHandler(this.btnSend_Click);
 
-            // ── Log box ─────────────────────────────────────────────────────────
+            // ── Log boxes ───────────────────────────────────────────────────────
+            this.lblLogSend.AutoSize  = false;
+            this.lblLogSend.Font      = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.lblLogSend.Location  = new System.Drawing.Point(300, 528);
+            this.lblLogSend.Size      = new System.Drawing.Size(580, 18);
+            this.lblLogSend.Text      = "SEND →";
+
             this.rtblogSend.Font        = new System.Drawing.Font("Courier New", 8.5F);
-            this.rtblogSend.Location    = new System.Drawing.Point(300, 530);
+            this.rtblogSend.Location    = new System.Drawing.Point(300, 546);
             this.rtblogSend.Name        = "rtblogSend";
             this.rtblogSend.ReadOnly    = true;
             this.rtblogSend.ScrollBars  = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtblogSend.Size        = new System.Drawing.Size(580, 270);
+            this.rtblogSend.Size        = new System.Drawing.Size(580, 254);
             this.rtblogSend.TabIndex    = ti++;
             this.rtblogSend.Text        = "";
+
+            this.lblLogRecv.AutoSize  = false;
+            this.lblLogRecv.Font      = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.lblLogRecv.Location  = new System.Drawing.Point(10, 272);
+            this.lblLogRecv.Size      = new System.Drawing.Size(275, 18);
+            this.lblLogRecv.Text      = "RECV ←";
+
+            this.rtblogRecv.Font        = new System.Drawing.Font("Courier New", 8.5F);
+            this.rtblogRecv.Location    = new System.Drawing.Point(10, 290);
+            this.rtblogRecv.Name        = "rtblogRecv";
+            this.rtblogRecv.ReadOnly    = true;
+            this.rtblogRecv.ScrollBars  = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtblogRecv.Size        = new System.Drawing.Size(275, 510);
+            this.rtblogRecv.TabIndex    = ti++;
+            this.rtblogRecv.Text        = "";
 
             // ── About GroupBox ──────────────────────────────────────────────────
             this.groupBox1.Controls.Add(this.lblAbout);
@@ -552,8 +641,18 @@ namespace XMSeriesRoboticWMTestSoftware
             this.Controls.Add(this.lblEndCurrentTimeVal);
             this.Controls.Add(this.lblPostGasVal);
             // send & log
+            this.Controls.Add(this.lblDeneme);
+            this.Controls.Add(this.txtDeneme);
+            this.Controls.Add(this.lblBekleme);
+            this.Controls.Add(this.txtBekleme);
+            this.Controls.Add(this.lblTestDuration);
+            this.Controls.Add(this.txtTestDuration);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.btnSend);
+            this.Controls.Add(this.lblLogSend);
             this.Controls.Add(this.rtblogSend);
+            this.Controls.Add(this.lblLogRecv);
+            this.Controls.Add(this.rtblogRecv);
             this.Controls.Add(this.groupBox1);
 
             this.Controls.Add(this.gbMachineOutputs);
@@ -638,7 +737,17 @@ namespace XMSeriesRoboticWMTestSoftware
         private System.Windows.Forms.Label          lblPostGasVal;
         // Send & log
         private System.Windows.Forms.Button         btnSend;
+        private System.Windows.Forms.Button         btnTest;
+        private System.Windows.Forms.TextBox        txtDeneme;
+        private System.Windows.Forms.Label          lblDeneme;
+        private System.Windows.Forms.TextBox        txtBekleme;
+        private System.Windows.Forms.Label          lblBekleme;
+        private System.Windows.Forms.TextBox        txtTestDuration;
+        private System.Windows.Forms.Label          lblTestDuration;
+        private System.Windows.Forms.Label          lblLogSend;
         private System.Windows.Forms.RichTextBox    rtblogSend;
+        private System.Windows.Forms.Label          lblLogRecv;
+        private System.Windows.Forms.RichTextBox    rtblogRecv;
         // Machine Outputs
         private System.Windows.Forms.Timer          timer2;
         private System.Windows.Forms.GroupBox       gbMachineOutputs;

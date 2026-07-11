@@ -1,6 +1,7 @@
 using FluentModbus;
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace XMSeriesRoboticWMTestSoftware
@@ -79,6 +80,8 @@ namespace XMSeriesRoboticWMTestSoftware
                 // Byte 10-11: WeldingCurrent (÷10 → A)
                 ushort rawI = (ushort)(b[10] | (b[11] << 8));
                 lblIoutVal.Text = $"{rawI} → {rawI / 10.0:F1} A";
+
+                LogRecvBytes(b);
             }
             catch { }
         }
@@ -106,69 +109,57 @@ namespace XMSeriesRoboticWMTestSoftware
 
         private byte ParseByte(string s) => byte.TryParse(s, out byte v) ? v : (byte)0;
 
+        private byte[] BuildBytes(byte weldingStart)
+        {
+            byte[] bytes = new byte[36];
+            bytes[0] = weldingStart;
+            bytes[1] = cbRobotReady.Checked ? (byte)1 : (byte)0;
+            bytes[2] = 5;   // JobNumber fixed
+            bytes[3] = 0;   // MachineMode 2T
+            bytes[4] = 0;   // TriggerState
+            bytes[5] = rbFreqPulse.Checked ? (byte)1 : rbSecondPulse.Checked ? (byte)2 : (byte)0;
+            WriteU16(bytes,  6, txtFreq.Text);
+            WriteU16(bytes,  8, txtDutyCycle.Text);
+            WriteU16(bytes, 10, txtPregas.Text);
+            WriteU16(bytes, 12, txtHotstartPercent.Text);
+            WriteU16(bytes, 14, txtHotstartTime.Text);
+            WriteU16(bytes, 16, txtStartSlope.Text);
+            WriteU16(bytes, 18, txtMainCurrent.Text);
+            WriteU16(bytes, 20, txtMainCurrentTime.Text);
+            WriteU16(bytes, 22, txtBaseCurrentPercent.Text);
+            WriteU16(bytes, 24, txtBaseCurrentTime.Text);
+            WriteU16(bytes, 26, txtEndSlope.Text);
+            WriteU16(bytes, 28, txtEndCurrentPercent.Text);
+            WriteU16(bytes, 30, txtEndCurrentTime.Text);
+            WriteU16(bytes, 32, txtPostGas.Text);
+            WriteU16(bytes, 34, rbLF.Checked ? "1" : "0");
+            return bytes;
+        }
+
+        private static void WriteU16(byte[] b, int offset, string text)
+        {
+            if (ushort.TryParse(text, out ushort v))
+            { b[offset] = (byte)(v & 0xFF); b[offset + 1] = (byte)(v >> 8); }
+        }
+
+        private void SendBytes(byte[] bytes)
+        {
+            short[] registers = new short[18];
+            for (int i = 0; i < 18; i++)
+            {
+                ushort val = (ushort)(bytes[2 * i] | (bytes[2 * i + 1] << 8));
+                registers[i] = (short)((val >> 8) | (val << 8));
+            }
+            _client?.WriteMultipleRegisters(1, 0, registers);
+        }
+
         private void btnSend_Click(object sender, EventArgs e)
         {
             try
             {
-                // TIG COM_DI struct — 23 bytes (packed) + 1 padding = 12 registers
-                byte[] bytes = new byte[24];
-
-                // Byte 0: WeldingStart
-                bytes[0]  = cbWeldingStart.Checked ? (byte)1 : (byte)0;
-                // Byte 1: RobotReady
-                bytes[1]  = cbRobotReady.Checked   ? (byte)1 : (byte)0;
-                // Byte 2: JobNumber — sabit 5
-                bytes[2]  = 5;
-                // Byte 3: MachineMode — sabit 0 (2T)
-                bytes[3]  = 0;
-                // Byte 4: TriggerState
-                bytes[4]  = 0;
-                // Byte 5: WorkingMode — 0=Standart, 1=FreqPulse, 2=SecondPulse
-                bytes[5]  = rbFreqPulse.Checked ? (byte)1 : rbSecondPulse.Checked ? (byte)2 : (byte)0;
-                // Byte 6-7: Freq (uint16_t, little-endian)
-                if (ushort.TryParse(txtFreq.Text, out ushort freq))
-                { bytes[6] = (byte)(freq & 0xFF); bytes[7] = (byte)(freq >> 8); }
-                // Byte 8: DutyCycle
-                bytes[8]  = ParseByte(txtDutyCycle.Text);
-                // Byte 9: PregasTime
-                bytes[9]  = ParseByte(txtPregas.Text);
-                // Byte 10: HotstartPercent
-                bytes[10] = ParseByte(txtHotstartPercent.Text);
-                // Byte 11: HotstartTime
-                bytes[11] = ParseByte(txtHotstartTime.Text);
-                // Byte 12: StartSlope
-                bytes[12] = ParseByte(txtStartSlope.Text);
-                // Byte 13-14: MainCurrent (uint16_t, little-endian)
-                if (ushort.TryParse(txtMainCurrent.Text, out ushort mc))
-                { bytes[13] = (byte)(mc & 0xFF); bytes[14] = (byte)(mc >> 8); }
-                // Byte 15: MainCurrentTime
-                bytes[15] = ParseByte(txtMainCurrentTime.Text);
-                // Byte 16: BaseCurrentPercent
-                bytes[16] = ParseByte(txtBaseCurrentPercent.Text);
-                // Byte 17: BaseCurrentTime
-                bytes[17] = ParseByte(txtBaseCurrentTime.Text);
-                // Byte 18: EndSlope
-                bytes[18] = ParseByte(txtEndSlope.Text);
-                // Byte 19: EndCurrentPercent
-                bytes[19] = ParseByte(txtEndCurrentPercent.Text);
-                // Byte 20: EndCurrentTime
-                bytes[20] = ParseByte(txtEndCurrentTime.Text);
-                // Byte 21: PostGasTime
-                bytes[21] = ParseByte(txtPostGas.Text);
-                // Byte 22: Ignition — 0=HF, 1=LF
-                bytes[22] = rbLF.Checked ? (byte)1 : (byte)0;
-                // Byte 23: padding (0)
-
-                // 24 byte → 12 register (little-endian pack, Modbus big-endian swap)
-                short[] registers = new short[12];
-                for (int i = 0; i < 12; i++)
-                {
-                    ushort val = (ushort)(bytes[2 * i] | (bytes[2 * i + 1] << 8));
-                    registers[i] = (short)((val >> 8) | (val << 8));
-                }
-
-                _client?.WriteMultipleRegisters(1, 0, registers);
-                LogBytes(bytes, 23);
+                byte[] bytes = BuildBytes(cbWeldingStart.Checked ? (byte)1 : (byte)0);
+                SendBytes(bytes);
+                LogBytes(bytes, 36);
                 MessageBox.Show("Sent Successfully!");
             }
             catch (Exception ex)
@@ -177,16 +168,90 @@ namespace XMSeriesRoboticWMTestSoftware
             }
         }
 
+        private async void btnTest_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtDeneme.Text,      out int deneme)  || deneme  <= 0) { MessageBox.Show("Geçerli deneme sayısı girin."); return; }
+            if (!int.TryParse(txtBekleme.Text,     out int bekleme) || bekleme <  0) { MessageBox.Show("Geçerli bekleme süresi girin."); return; }
+            if (!int.TryParse(txtTestDuration.Text, out int sure)   || sure    <= 0) { MessageBox.Show("Geçerli test süresi girin."); return; }
+
+            btnTest.Enabled = false;
+            try
+            {
+                for (int i = 0; i < deneme; i++)
+                {
+                    btnTest.Text = string.Format("{0}/{1} {2}s...", i + 1, deneme, sure);
+
+                    byte[] onBytes = BuildBytes(1);
+                    SendBytes(onBytes);
+                    LogBytes(onBytes, 23);
+
+                    await Task.Delay(sure * 1000);
+
+                    byte[] offBytes = BuildBytes(0);
+                    SendBytes(offBytes);
+                    LogBytes(offBytes, 23);
+
+                    if (i < deneme - 1 && bekleme > 0)
+                    {
+                        btnTest.Text = string.Format("{0}/{1} Bekleme {2}s...", i + 1, deneme, bekleme);
+                        await Task.Delay(bekleme * 1000);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Error: {0}", ex.Message));
+            }
+            finally
+            {
+                btnTest.Enabled = true;
+                btnTest.Text    = "Test";
+            }
+        }
+
+        private void LogRecvBytes(byte[] b)
+        {
+            string[] names = {
+                "Status0 (b5=ArcStbl, b3=ProcAct)", "Status1",
+                "Status2 (b3=LimitSignal)",          "Status3",
+                "Status4 (b7=NotReady)",             "Status5",
+                "Status6",                            "Status7",
+                "WeldVoltage_L",                     "WeldVoltage_H",
+                "WeldCurrent_L",                     "WeldCurrent_H"
+            };
+            ushort rawV = (ushort)(b[8]  | (b[9]  << 8));
+            ushort rawI = (ushort)(b[10] | (b[11] << 8));
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] RECV ←");
+            for (int i = 0; i < b.Length && i < names.Length; i++)
+                sb.AppendLine($"Byte {i,2}: {b[i],3}  ({names[i]})");
+            sb.AppendLine($"  → Voltage: {rawV / 10.0:F1} V");
+            sb.AppendLine($"  → Current: {rawI / 10.0:F1} A");
+            rtblogRecv.Clear();
+            rtblogRecv.AppendText(sb.ToString());
+        }
+
         private void LogBytes(byte[] bytes, int count = -1)
         {
             string[] names = {
-                "WeldingStart", "RobotReady", "JobNumber(fixed=5)", "MachineMode(2T fixed)",
-                "TriggerState", "WorkingMode(0=Std,1=Freq,2=Sec)", "Freq_L", "Freq_H",
-                "DutyCycle", "PregasTime", "HotstartPercent", "HotstartTime",
-                "StartSlope", "MainCurrent_L", "MainCurrent_H", "MainCurrentTime",
-                "BaseCurrentPercent", "BaseCurrentTime", "EndSlope",
-                "EndCurrentPercent", "EndCurrentTime", "PostGasTime",
-                "Ignition(0=HF,1=LF)"
+                "WeldingStart",          "RobotReady",
+                "JobNumber(fixed=5)",    "MachineMode(2T fixed)",
+                "TriggerState",          "WorkingMode(0=Std,1=Freq,2=Sec)",
+                "Freq_L",                "Freq_H",
+                "DutyCycle_L",           "DutyCycle_H",
+                "PregasTime_L",          "PregasTime_H",
+                "HotstartPercent_L",     "HotstartPercent_H",
+                "HotstartTime_L",        "HotstartTime_H",
+                "StartSlope_L",          "StartSlope_H",
+                "MainCurrent_L",         "MainCurrent_H",
+                "MainCurrentTime_L",     "MainCurrentTime_H",
+                "BaseCurrentPercent_L",  "BaseCurrentPercent_H",
+                "BaseCurrentTime_L",     "BaseCurrentTime_H",
+                "EndSlope_L",            "EndSlope_H",
+                "EndCurrentPercent_L",   "EndCurrentPercent_H",
+                "EndCurrentTime_L",      "EndCurrentTime_H",
+                "PostGasTime_L",         "PostGasTime_H",
+                "Ignition_L",            "Ignition_H"
             };
             int len = (count < 0) ? bytes.Length : count;
             var sb = new System.Text.StringBuilder();
